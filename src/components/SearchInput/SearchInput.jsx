@@ -6,12 +6,12 @@ export const SearchInput = ({ onSearch }) => {
   };
 
   return (
-    <>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <Input
         type="search"
         placeholder="Search heroes"
         onChange={handleInputChange}
       />
-    </>
+    </div>
   );
 };

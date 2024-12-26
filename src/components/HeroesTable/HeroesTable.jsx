@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+
 import { getFilmHeroes } from "../../utils/serverAPI";
+
 import { HeroesTableItem } from "../HeroesTableItem/HeroesTableItem";
-import { HeroesList } from "./HeroesTable.styled";
+import { TailSpin } from "react-loader-spinner";
+
+import { Container, HeroesList } from "./HeroesTable.styled";
 
 export const HeroesTable = ({ searchQuery }) => {
   const [heroes, setHeroes] = useState([]);
@@ -30,9 +34,18 @@ export const HeroesTable = ({ searchQuery }) => {
   );
 
   return (
-    <div>
+    <Container>
       {isLoading ? (
-        <p>Loading heroes...</p>
+        <TailSpin
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
       ) : (
         <HeroesList>
           {filteredHeroes.map((hero, index) => (
@@ -42,6 +55,6 @@ export const HeroesTable = ({ searchQuery }) => {
           ))}
         </HeroesList>
       )}
-    </div>
+    </Container>
   );
 };

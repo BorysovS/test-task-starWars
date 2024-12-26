@@ -2,12 +2,19 @@ import { useState } from "react";
 
 import { getHeroPlanets } from "../../utils/serverAPI";
 
+import { IoClose } from "react-icons/io5";
+
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { ThreeDots } from "react-loader-spinner";
+
 import {
   PopupBtn,
   PopupText,
   PopupWrap,
   ItemWrapper,
   ItemText,
+  MoreBtn,
+  TextWrap,
 } from "./HeroesTableItem.styled";
 
 export const HeroesTableItem = ({ hero }) => {
@@ -53,18 +60,42 @@ export const HeroesTableItem = ({ hero }) => {
       <ItemText>{gender}</ItemText>
       <ItemText>{birth_year}</ItemText>
       <div>
-        <button type="button" onClick={handleClick}>
-          {isLoading ? "Loading..." : "More info"}
-        </button>
+        <MoreBtn type="button" onClick={handleClick}>
+          {isLoading ? (
+            <ThreeDots
+              visible={true}
+              height="20"
+              width="20"
+              color="#ee00ff"
+              radius="9"
+              ariaLabel="three-dots-loading"
+              wrapperClass=""
+            />
+          ) : (
+            "More info"
+          )}
+          <MdKeyboardDoubleArrowRight size={24} color="white" />
+        </MoreBtn>
       </div>
 
       {isOpen && planetInfo && (
         <PopupWrap>
-          <PopupText>Name:{planetInfo.name}</PopupText>
-          <PopupText>Climate: {planetInfo.climate}</PopupText>
-          <PopupText>Terrain: {planetInfo.terrain}</PopupText>
-          <PopupText>Population: {planetInfo.population}</PopupText>
-          <PopupBtn onClick={handleClose}>Close</PopupBtn>
+          <strong style={{ margin: "0 auto" }}>Planet information</strong>
+          <PopupText>
+            Name: <TextWrap>{planetInfo.name}</TextWrap>
+          </PopupText>
+          <PopupText>
+            Climate: <TextWrap>{planetInfo.climate}</TextWrap>
+          </PopupText>
+          <PopupText>
+            Terrain: <TextWrap>{planetInfo.terrain}</TextWrap>
+          </PopupText>
+          <PopupText>
+            Population: <TextWrap>{planetInfo.population}</TextWrap>
+          </PopupText>
+          <PopupBtn onClick={handleClose}>
+            <IoClose size={24} color="white" />
+          </PopupBtn>
         </PopupWrap>
       )}
     </ItemWrapper>

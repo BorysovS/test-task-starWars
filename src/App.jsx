@@ -15,7 +15,9 @@ function App() {
   return (
     <>
       <AppBar />
-      <SearchInput onSearch={handleSearch} />
+      <div style={{ padding: "40px 20px" }}>
+        <SearchInput onSearch={handleSearch} />
+      </div>
       <HeroesTable searchQuery={searchQuery} />
     </>
   );
